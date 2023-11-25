@@ -1,11 +1,22 @@
 import { Link } from "react-router-dom";
+import DropdownMenu from "./DropdownMenu";
+import useAuth from "../../Hooks/useAuth";
 
 const Navbar = () => {
+  const {user} = useAuth();
  const navOptions = (
    <>
      <li>
        <Link to={"/"}>Home</Link>
      </li>
+     <li>
+       <Link to={"/products"}>Products</Link>
+     </li>
+     {!user && (
+       <li>
+         <Link to={"/registration"}>Registration</Link>
+       </li>
+     )}
    </>
  );
  return (
@@ -37,7 +48,7 @@ const Navbar = () => {
            </ul>
          </div>
          <Link to={"/"}>
-           <button className="btn btn-ghost normal-case text-2xl">
+           <button className="btn btn-ghost normal-case text-xl">
              Tech Haven
            </button>
          </Link>
@@ -45,9 +56,9 @@ const Navbar = () => {
        <div className="navbar-center hidden lg:flex">
          <ul className="menu menu-horizontal px-1">{navOptions}</ul>
        </div>
-       {/* <div className="navbar-end">
-          <a className="">Button</a>
-        </div> */}
+       <div className="navbar-end">
+         <DropdownMenu></DropdownMenu>
+        </div>
      </div>
    </>
  );

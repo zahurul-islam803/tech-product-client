@@ -1,11 +1,25 @@
 import { Helmet } from "react-helmet-async";
 import useAuth from "../../Hooks/useAuth";
 import useRole from "../../Hooks/useRole";
+import { useState } from "react";
+import SubscriptionModal from "../../Components/Modal/SubscriptionModal";
 
 const Profile = () => {
   const { user } = useAuth();
   const [role] = useRole();
-  console.log(user);
+    const [isOpen, setIsOpen] = useState(false);
+    const closeModal = () => {
+      setIsOpen(false);
+    };
+    let price = 159;
+    const [subscriptionInfo, setSubscriptionInfo] = useState({
+      guest: {
+        name: user?.displayName,
+        email: user?.email,
+        image: user?.photoURL,
+      },
+      price: price,
+    });
   return (
     <div className="flex justify-center items-center h-screen">
       <Helmet>
@@ -29,9 +43,6 @@ const Profile = () => {
           <p className="p-2 px-4 text-xs text-white bg-pink-500 rounded-full">
             {role && role.toUpperCase()}
           </p>
-          <p className="mt-2 text-xl font-medium text-gray-800 ">
-            User Id: {user?.uid}
-          </p>
           <div className="w-full p-2 mt-4 rounded-lg">
             <div className="flex flex-wrap items-center justify-between text-sm text-gray-600 ">
               <p className="flex flex-col">
@@ -46,17 +57,25 @@ const Profile = () => {
               </p>
 
               <div>
-                <button className="bg-[#F43F5E] px-10 py-1 my-2 rounded-lg text-white cursor-pointer hover:bg-[#af4053] block mb-1">
-                  Update Profile
+                <button
+                  onClick={() => setIsOpen(true)}
+                  className="bg-[#F43F5E] px-9 py-1 rounded-lg text-white cursor-pointer hover:bg-[#af4053] block mb-1"
+                >
+                  $159
                 </button>
                 <button className="bg-[#F43F5E] px-7 py-1 rounded-lg text-white cursor-pointer hover:bg-[#af4053]">
-                  Change Password
+                  verified
                 </button>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <SubscriptionModal
+        closeModal={closeModal}
+        isOpen={isOpen}
+        subscriptionInfo={subscriptionInfo}
+      ></SubscriptionModal>
     </div>
   );
 };

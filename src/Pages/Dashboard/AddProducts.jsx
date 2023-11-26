@@ -4,7 +4,7 @@ const AddProducts = () => {
   return (
     <div>
       <Helmet>
-        <title>TechHaven | Profile</title>
+        <title>TechHaven | Add Products</title>
       </Helmet>
     </div>
   );

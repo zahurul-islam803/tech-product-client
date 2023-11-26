@@ -90,7 +90,13 @@ const router = createBrowserRouter([
       },
       {
         path: "manage-users",
-        element: <ManageUsers></ManageUsers>,
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <ManageUsers></ManageUsers>
+            </AdminRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "manage-coupons",

@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { FcGoogle } from "react-icons/fc";
-import { TbFidgetSpinner } from "react-icons/tb";
+import { ImSpinner3 } from "react-icons/im";
 import { getToken, saveUser } from "../../api/auth";
 import toast from "react-hot-toast";
 
@@ -99,7 +99,7 @@ const Login = () => {
                  className="bg-rose-500 w-full rounded-md py-3 text-white"
                >
                  {loading ? (
-                   <TbFidgetSpinner className="animate-spin m-auto" />
+                   <ImSpinner3 className="animate-spin m-auto" />
                  ) : (
                    "Login"
                  )}

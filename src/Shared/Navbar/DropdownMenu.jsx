@@ -48,7 +48,7 @@ const DropdownMenu = () => {
                   Dashboard
                 </Link>
                 <div
-                  onClick={logOut}
+                  onClick={logOut()}
                   className="px-4 py-3 hover:bg-[#55ade3] transition font-semibold cursor-pointer"
                 >
                   LogOut
@@ -56,7 +56,6 @@ const DropdownMenu = () => {
               </>
             ) : (
               <>
-                {" "}
                 <Link
                   to="/login"
                   className="px-4 py-3 hover:bg-[#55ade3] transition font-semibold"

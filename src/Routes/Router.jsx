@@ -14,6 +14,9 @@ import Statistics from "../Pages/Dashboard/Statistics";
 import ManageUsers from "../Pages/Dashboard/ManageUsers";
 import ManageCoupons from "../Pages/Dashboard/ManageCoupons";
 import AddProducts from "../Pages/Dashboard/AddProducts";
+import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
+import ModeratorRoute from "./ModeratorRoute";
 
 const router = createBrowserRouter([
   {
@@ -41,7 +44,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout></DashboardLayout>,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "my-profile",
@@ -53,15 +60,33 @@ const router = createBrowserRouter([
       },
       {
         path: "product-review-queue",
-        element: <ProductReviewQueue></ProductReviewQueue>,
+        element: (
+          <PrivateRoute>
+            <ModeratorRoute>
+              <ProductReviewQueue></ProductReviewQueue>
+            </ModeratorRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "reported-contents",
-        element: <ReportedContents></ReportedContents>,
+        element: (
+          <PrivateRoute>
+            <ModeratorRoute>
+              <ReportedContents></ReportedContents>
+            </ModeratorRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "statistics-page",
-        element: <Statistics></Statistics>,
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <Statistics></Statistics>
+            </AdminRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "manage-users",
@@ -69,7 +94,13 @@ const router = createBrowserRouter([
       },
       {
         path: "manage-coupons",
-        element: <ManageCoupons></ManageCoupons>,
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <ManageCoupons></ManageCoupons>
+            </AdminRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "add-product",

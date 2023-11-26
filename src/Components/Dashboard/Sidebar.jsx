@@ -1,5 +1,5 @@
 import { useState } from "react";
-import logo from '../../../public/footer-logo.png'
+import logo from '/footer-logo.png'
 // Icons
 import { GrLogout } from "react-icons/gr";
 import { FcSettings } from "react-icons/fc";

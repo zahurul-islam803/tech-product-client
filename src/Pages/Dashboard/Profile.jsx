@@ -5,7 +5,6 @@ import { useState } from "react";
 import SubscriptionModal from "../../Components/Modal/SubscriptionModal";
 import { useQuery } from "@tanstack/react-query";
 import { getSubscriptions } from "../../api/subscription";
-import Loader from "../../Shared/Loader";
 
 const Profile = () => {
   const { user, loading} = useAuth();
@@ -26,15 +25,15 @@ const Profile = () => {
 
     const {
       data: subscription = [],
-      isLoading
+       refetch
     } = useQuery({
       queryKey: ["subscription", user?.email],
       enabled: !loading,
       queryFn: async () => await getSubscriptions(user?.email),
     });
     const subscriptEmail = subscription.map(subscript => subscript.guest.email );
-    if (isLoading) return <Loader></Loader>;
-
+    refetch();
+      
   return (
     <div className="flex justify-center items-center h-screen">
       <Helmet>
@@ -72,6 +71,9 @@ const Profile = () => {
               </p>
 
               <div>
+                <p className="text-[#F43F5E] text-xl block mb-2">
+                  Subscription MemberShip
+                </p>
                 {user?.email === subscriptEmail[0] ? (
                   <button className="bg-[#F43F5E] px-7 py-1 rounded-lg text-white cursor-pointer hover:bg-[#af4053]">
                     verified
@@ -79,7 +81,7 @@ const Profile = () => {
                 ) : (
                   <button
                     onClick={() => setIsOpen(true)}
-                    className="bg-[#F43F5E] px-9 py-1 rounded-lg text-white cursor-pointer hover:bg-[#af4053] block mb-1"
+                    className="bg-[#F43F5E] px-9 py-1 rounded-lg text-white cursor-pointer hover:bg-[#af4053]"
                   >
                     $159
                   </button>

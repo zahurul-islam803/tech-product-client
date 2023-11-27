@@ -40,12 +40,13 @@ const AddProducts = () => {
       description,
       image: image_url?.data?.display_url,
       ownerInfo: {
-      owner_name,
-      owner_image,
-      owner_email
+        owner_name,
+        owner_image,
+        owner_email,
       },
       tag,
       links,
+      timestamp: Date.now(),
     };
      try {
        await addProduct(productData);

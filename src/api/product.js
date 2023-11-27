@@ -7,16 +7,16 @@ export const addProduct = async (productData) => {
 };
 
 // get all product data
-export const getAllRooms = async () => {
-  const { data } = await axiosSecure.get("/rooms");
+export const getAllProduct = async () => {
+  const { data } = await axiosSecure.get("/products");
+  return data;
+};
+// get all product sort by timestamp latest product data
+export const getSortTimestamp = async () => {
+  const { data } = await axiosSecure.get("/products?sortField=timestamp&sortOrder=desc");
   return data;
 };
 
-// get rooms data for host
-export const getHostRooms = async (email) => {
-  const { data } = await axiosSecure.get(`/rooms/${email}`);
-  return data;
-};
 
 // get single room data from database
 export const getRoom = async (id) => {

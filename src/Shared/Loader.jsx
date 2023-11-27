@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { BounceLoader} from "react-spinners";
-
 const Loader = ({ smallHeight }) => {
   return (
     <div

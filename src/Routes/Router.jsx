@@ -17,6 +17,8 @@ import AddProducts from "../Pages/Dashboard/AddProducts";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import ModeratorRoute from "./ModeratorRoute";
+import ProductDetails from "../Pages/Products/ProductDetails";
+import { getProduct } from "../api/product";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,11 @@ const router = createBrowserRouter([
         path: "products",
         element: <Products></Products>,
       },
+      {
+        path: 'product/:id',
+        element: <PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>,
+        loader: ({params}) => getProduct(params.id),
+      }
     ],
   },
   {

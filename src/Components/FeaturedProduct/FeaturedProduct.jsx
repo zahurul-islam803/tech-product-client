@@ -4,7 +4,11 @@ import Loader from "../../Shared/Loader";
 import { getSortTimestamp } from "../../api/product";
 import Container from "../../Shared/Navbar/Container";
 import { BiUpvote } from "react-icons/bi";
+import useAuth from "../../Hooks/useAuth";
+import { Link, useNavigate } from "react-router-dom";
 const FeaturedProduct = () => {
+  const {user} = useAuth();
+  const navigate = useNavigate();
   const {
     data: products = [],
     isLoading,
@@ -27,19 +31,36 @@ const FeaturedProduct = () => {
   );
   return (
     <Container>
-      <h1 className="text-center text-5xl text-gray-400 mb-10 mt-16">Featured Products</h1>
+      <h1 className="text-center text-5xl text-gray-400 mb-10 mt-16">
+        Featured Products
+      </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {category?.map((cate) => (
           <>
             <div className="card card-compact bg-base-100 shadow-xl">
               <figure>
-                <img className="h-[250px] w-[400px]" src={cate?.image} alt="products" />
+                <img
+                  className="h-[250px] w-[400px]"
+                  src={cate?.image}
+                  alt="products"
+                />
               </figure>
               <div className="card-body">
-                <h2 className="card-title">{cate?.product_name}</h2>
+                <Link to={`/product/${cate._id}`}>
+                  <h2 className="card-title">{cate?.product_name}</h2>
+                </Link>
                 <p>Tags: {cate?.tag[0]}</p>
                 <div className="card-actions justify-end">
-                  <button className="btn btn-warning"><BiUpvote  size={20}></BiUpvote></button>
+                  {user?.email ? (
+                    <button
+                      disabled={cate.ownerInfo.owner_email === user.email}
+                      className="btn btn-warning cursor-pointer"
+                    >
+                      <BiUpvote size={20}></BiUpvote>
+                    </button>
+                  ) : (
+                    navigate("/login")
+                  )}
                 </div>
               </div>
             </div>

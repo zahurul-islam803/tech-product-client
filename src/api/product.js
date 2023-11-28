@@ -18,8 +18,8 @@ export const getSortTimestamp = async () => {
 };
 
 
-// get single room data from database
-export const getRoom = async (id) => {
-  const { data } = await axiosSecure.get(`/room/${id}`);
+// get single product data from database
+export const getProduct = async (id) => {
+  const { data } = await axiosSecure.get(`/product/${id}`);
   return data;
 };

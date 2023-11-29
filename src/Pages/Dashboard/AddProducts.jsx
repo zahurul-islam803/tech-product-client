@@ -46,6 +46,8 @@ const AddProducts = () => {
       },
       tag,
       links,
+      status: "pending",
+      upVote: 0,
       timestamp: Date.now(),
     };
      try {

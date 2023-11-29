@@ -6,6 +6,12 @@ export const addProduct = async (productData) => {
   return data;
 };
 
+// save review for product to database
+export const addReview = async (reviewData) => {
+  const { data } = await axiosSecure.post(`/reviews`, reviewData);
+  return data;
+};
+
 // get all product data
 export const getAllProduct = async () => {
   const { data } = await axiosSecure.get(

@@ -14,6 +14,11 @@ const Products = () => {
   const [page, setPage] =  useState(1);
   const limit = Number(20);
 
+  const [upVote, setUpVote] = useState(0);
+
+  const handleUpVote = () =>{
+    setUpVote(upVote + 1);
+  }
 
   const {
     data: products = [],
@@ -78,6 +83,7 @@ const Products = () => {
                   <div className="card-actions justify-end">
                     {user?.email ? (
                       <button
+                        onClick={handleUpVote}
                         disabled={
                           product?.ownerInfo?.owner_email === user.email
                         }

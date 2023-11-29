@@ -25,3 +25,9 @@ export const getProduct = async (id) => {
   const { data } = await axiosSecure.get(`/product/${id}`);
   return data;
 };
+
+// delete product data from database
+export const deleteProduct = async (id) => {
+  const {data} = await axiosSecure.delete(`/products/${id}`);
+  return data;
+}

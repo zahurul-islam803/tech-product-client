@@ -8,7 +8,9 @@ export const addProduct = async (productData) => {
 
 // get all product data
 export const getAllProduct = async () => {
-  const { data } = await axiosSecure.get("/products");
+  const { data } = await axiosSecure.get(
+    `/products`
+  );
   return data;
 };
 // get all product sort by timestamp latest product data

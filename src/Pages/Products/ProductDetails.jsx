@@ -6,12 +6,28 @@ import useAuth from "../../Hooks/useAuth";
 import { useState } from "react";
 import { ImSpinner10 } from "react-icons/im";
 import toast from "react-hot-toast";
-import { addReview } from "../../api/product";
+import { addReview, getProductReview } from "../../api/product";
+import Loader from "../../Shared/Loader";
+import { useQuery } from "@tanstack/react-query";
+import Review from "../../Components/Review/Review";
 
 const ProductDetails = () => {
   const product = useLoaderData();
   const {user} = useAuth();
   const [loading, setLoading] = useState(false);
+
+    const {
+      data: reviews = [],
+      isLoading,
+      isError,
+      error,
+    } = useQuery({
+      queryKey: ["review"],
+      queryFn: getProductReview,
+    });
+
+    const filterReviewData = reviews.filter(review => review.productId === product._id)
+
   const handleAddReview = async (e) => {
     setLoading(true)
     e.preventDefault();
@@ -38,6 +54,13 @@ const ProductDetails = () => {
         setLoading(false);
       }
   };
+
+   if (isLoading) {
+     return <Loader></Loader>;
+   }
+   if (isError) {
+     return toast.error(error);
+   }
 
   return (
     <Container>
@@ -67,6 +90,13 @@ const ProductDetails = () => {
           </div>
         </div>
         {/* show all review section this product */}
+
+        <div className="my-12">
+          <h1 className="text-center text-5xl text-gray-400 mb-6 mt-2">Review</h1>
+          {
+            filterReviewData.length > 0 ? <Review filterReviewData={filterReviewData}></Review>: <p className="text-center text-2xl text-red-500">No Review Yet!</p>
+          }
+        </div>
 
         {/* post review section */}
         <div className="w-full flex flex-col justify-center items-center mt-14 py-6 text-gray-800 rounded-xl bg-gray-50">

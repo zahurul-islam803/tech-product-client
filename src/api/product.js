@@ -12,11 +12,15 @@ export const addReview = async (reviewData) => {
   return data;
 };
 
+// get product review data
+export const getProductReview = async () => {
+  const { data } = await axiosSecure.get(`/reviews`);
+  return data;
+};
+
 // get all product data
 export const getAllProduct = async () => {
-  const { data } = await axiosSecure.get(
-    `/products`
-  );
+  const { data } = await axiosSecure.get(`/products`);
   return data;
 };
 // get all product sort by timestamp latest product data

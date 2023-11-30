@@ -48,12 +48,8 @@ export const updateRole = async ({ email, role }) => {
   return data;
 };
 
-// // become a host
-// export const becomeHost = async (email) => {
-//   const currentUser = {
-//     email,
-//     status: "Requested",
-//   };
-//   const { data } = await axiosSecure.put(`/users/${email}`, currentUser);
+// get stats data
+// export const getStats = async () =>{
+//   const { data } = await axiosSecure.get("/admin-stats");
 //   return data;
-// };
+// }

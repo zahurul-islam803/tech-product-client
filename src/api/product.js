@@ -23,11 +23,11 @@ export const getAllProduct = async () => {
   const { data } = await axiosSecure.get(`/products`);
   return data;
 };
-// get all product sort by timestamp latest product data
-export const getSortTimestamp = async () => {
-  const { data } = await axiosSecure.get("/products?sortField=timestamp&sortOrder=desc");
-  return data;
-};
+// // get all product sort by timestamp latest product data
+// export const getSortTimestamp = async () => {
+//   const { data } = await axiosSecure.get("/products?sortField=timestamp&sortOrder=desc");
+//   return data;
+// };
 
 
 // get single product data from database

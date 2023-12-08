@@ -1,14 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import Loader from "../../Shared/Loader";
-import { getSortTimestamp } from "../../api/product";
+// import { getSortTimestamp } from "../../api/product";
 import Container from "../../Shared/Navbar/Container";
 import { BiUpvote } from "react-icons/bi";
 import useAuth from "../../Hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 const FeaturedProduct = () => {
   const {user} = useAuth();
   const navigate = useNavigate();
+
+  const instance = axios.create({
+    baseURL: import.meta.env.VITE_BASEURL,
+    withCredentials: true,
+  });
+
   const {
     data: products = [],
     isLoading,
@@ -16,7 +23,12 @@ const FeaturedProduct = () => {
     error,
   } = useQuery({
     queryKey: ["product"],
-    queryFn: getSortTimestamp,
+    queryFn: async () => {
+      const res = await instance.get(
+        "/products?sortField=timestamp&sortOrder=desc"
+      );
+      return res.data;
+    },
   });
   if (isLoading) {
     return <Loader></Loader>;
